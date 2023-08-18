@@ -1,4 +1,4 @@
 ### Hello！Here is myqf 👋
 
-- 🔭 I am a Security Service Engineer .
-- 🥱 Internship in Party B's security company from 2022 to 2023.
+- 🔭 我现在是一名安全服务工程师 .
+- 🥱 2022-2023年，在一家乙方安全公司实习.
